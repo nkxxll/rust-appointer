@@ -36,7 +36,7 @@ impl Appointment {
             $appointment.Start = "{}"
             $appointment.End = "{}"
             $appointment.Body = "{}"
-            $appointment.ReminderSet = true
+            $appointment.ReminderSet = $true
             $appointment.ReminderMinutesBeforeStart = 15
             $appointment.Save()
             "#,
@@ -45,8 +45,9 @@ impl Appointment {
         if self.display {
             com += "\n$appointment.Save()";
         };
+        print!("{}", com);
         // execute the command with powershell
-        let output = std::process::Command::new("powershell")
+        let output = std::process::Command::new("powershell.exe")
             .arg("-Command")
             .arg(com)
             .output()
